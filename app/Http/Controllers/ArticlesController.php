@@ -35,4 +35,29 @@ class ArticlesController extends Controller
             ],401);
         }
     }
+
+    public function create(Request $request){
+
+        $data = Article::create([
+            'title' => $request->title, 
+            'articles' => $request->articles, 
+            'idcategory' => $request->idcategory, 
+            'slug' => $request->slug, 
+            'thumbnail' => $request->thumbnail, 
+        ]);
+
+        if($data){
+            return response()->json([
+                'success'=>true,
+                'messages'=> 'Article Was Successfully created',
+                'data' => $data,
+            ],201);
+        }else{
+            return response()->json([
+                'success' => true,
+                'messages' => 'Failed to create Article',
+                'data' => '',
+            ],401);
+        }
+    }
 }

@@ -52,3 +52,4 @@ $router->post('/user/update','UserController@update');
 // Articles
 
 $router->get('/articles', 'ArticlesController@list');
+$router->post('/articles/create', 'ArticlesController@create',['middleware','auth']);

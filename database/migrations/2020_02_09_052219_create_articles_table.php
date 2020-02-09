@@ -15,12 +15,21 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->notnull();
-            $table->string('articles')->notnull();
-            $table->string('idcategory')->notnull();
+            $table->string('title');
+            $table->longText('articles');
+            $table->unsignedInteger('idcategory')->nullable();
             $table->string('slug');
-            $table->string('thumbnail');
+            $table->unsignedInteger('iduser')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
+            $table->foreign('iduser')
+                ->references('id')->on('users')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
+            $table->foreign('idcategory')
+                ->references('id')->on('categories')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
         });
     }
 
